@@ -2,7 +2,8 @@
   "name": "@scrrum-labs/sendgrid-inbound-parser",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc"
