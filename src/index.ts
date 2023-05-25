@@ -99,7 +99,7 @@
     let attachments = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachments\""));
     attachments = attachments?.split("\"attachments\"")[1].trim();
     const attachmentsNumber = parseInt(attachments? attachments : "0");
-    let attachment : any[] = []
+    const attachment : any[] = []
   
     if(attachments){
       for (let i=1; i<=attachmentsNumber; i++) {
