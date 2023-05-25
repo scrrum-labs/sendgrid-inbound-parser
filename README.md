@@ -23,7 +23,7 @@ $ npm install --save @scrrum-labs/sendgrid-inbound-parser
 ## Usage
 At your hosted url
 ```sh
-import * as sg from '@scrrum-labs/sendgrid-inbound-parser'
+const sg = require("@scrrum-labs/sendgrid-inbound-parser");
 
 export const storeEmail = functions.https.onRequest(async (request) => {
               const subject = sg.getSubject(request.body)
