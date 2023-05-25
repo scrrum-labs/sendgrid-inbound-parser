@@ -1,0 +1,10 @@
+export declare const getContact: (data: any) => any[];
+export declare const getTo: (data: any) => any;
+export declare const getBody: (data: any) => any;
+export declare const getFrom: (data: any) => any[];
+export declare const getSubject: (data: any) => any;
+export declare const getSenderIP: (data: any) => any;
+export declare const getAttachmentsNumber: (data: any) => number;
+export declare const getHtmlBody: (data: any) => any;
+export declare const getAttachmentInfo: (data: any) => any;
+export declare const getAttachment: (data: any) => any[] | "No Attachments found";
