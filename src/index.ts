@@ -73,8 +73,14 @@
     const arrayBody = emailBody.split("--xYzZY");
     let attachments = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachments\""));
     attachments = attachments?.split("\"attachments\"")[1].trim();
-    const attachmentsNumber = parseInt(attachments? attachments : "0");
-    return attachmentsNumber;
+
+    if(attachments){
+      const attachmentsNumber = parseInt(attachments? attachments : "0");
+      return attachmentsNumber;
+    }
+    else {
+      return "No Attachments found";
+    }
   }
   
   export const getHtmlBody = (data:any) => {
@@ -88,9 +94,18 @@
   export const getAttachmentInfo = (data:any) => {
     const emailBody = data.toString();
     const arrayBody = emailBody.split("--xYzZY");
-    let attachmentInfo = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachment-info\""));
+    let attachments = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachments\""));
+    attachments = attachments?.split("\"attachments\"")[1].trim();
+
+    if(attachments){
+      let attachmentInfo = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachment-info\""));
     attachmentInfo = attachmentInfo?.split("\"attachment-info\"")[1].trim();
     return JSON.parse(attachmentInfo);
+    }
+    else{
+      return "No Attachments found";
+    }
+    
   }
   
   export const getAttachment = (data:any) => {
