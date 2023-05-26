@@ -22,7 +22,18 @@
     const arrayBody = emailBody.split("--xYzZY");
     let to = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"to\""));
     to = to?.split("\"to\"")[1].trim();
-    return to;
+    const contacts: any[] = [];
+    const parts = to?.split(",");
+    for (const part of parts? parts : "") {
+      const match = part?.trim().match(/^(.+?)?\s*<(.+?)>$/);
+      if (match) {
+        const [, name, email] = match;
+        contacts.push({name: name?.trim() || null, email: email?.trim()});
+      } else {
+        contacts.push({name: null, email: part?.trim()});
+      }
+    }
+    return contacts;
   }
   
   export const getBody = (data:any) => {
@@ -96,8 +107,9 @@
     const arrayBody = emailBody.split("--xYzZY");
     let attachments = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachments\""));
     attachments = attachments?.split("\"attachments\"")[1].trim();
+    const attachmentsNumber = parseInt(attachments? attachments : "0");
 
-    if(attachments){
+    if(attachmentsNumber>0){
       let attachmentInfo = arrayBody.find((t : any) => t.includes("Content-Disposition: form-data; name=\"attachment-info\""));
     attachmentInfo = attachmentInfo?.split("\"attachment-info\"")[1].trim();
     return JSON.parse(attachmentInfo);
@@ -116,7 +128,7 @@
     const attachmentsNumber = parseInt(attachments? attachments : "0");
     const attachment : any[] = []
   
-    if(attachments){
+    if(attachmentsNumber>0){
       for (let i=1; i<=attachmentsNumber; i++) {
         const attachmentDataArray = arrayBody.find((t : any) => t.includes(`Content-Disposition: form-data; name="attachment${i}"`));
         const attachmentDataAll = attachmentDataArray?.split(`"attachment${i}"`)[1].trim();
